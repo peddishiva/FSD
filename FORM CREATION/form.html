@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>User registration and login page
+    </title>
+    <style>
+        body{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color:antiquewhite;
+        }
+        table{
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 300px;
+            display: none;
+        }
+        td{ 
+            padding:10px;
+        }
+        button{
+            margin: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: chartreuse;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+    </style>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div>
+        <button onclick="showForm('login')">Login</button>
+        <button onclick="showForm('register')">Register</button>
+    </div>
+    <table id="formTable">
+        <tbody>
+            <tr id="loginRow" style="display:none;">
+                <td>
+                    <h2>Login</h2>
+                    <form onsubmit="return validateLogin()">
+                    Username:<input type="text" id="loginUsername" placeholder="Username" required>
+                    password:<input type="password" id="loginPassword" placeholder="Password" required>
+                    <button type="submit">Submit</button>
+                </form>
+                </td>
+            </tr>
+            <tr id="registerRow" style="display: none;">
+            <td>
+                <h2>Register</h2>
+                <form onsubmit="return validateRegister()">
+                    Name:<input type="text" id="registerName" placeholder="Name" required>
+                    Phone:<input type="number" id="registerPhone" placeholder="Phone" required>
+                    Email Id:<input type="email" id="registerEmail" placeholder="Email" required>
+                    Gender:<input type="radio" name="gender" value="male">male
+                    <input type="radio" name="gender" value="male">Female<br/>
+                    DOB:<input type="date" id="registerDOB" placeholder="Date of birth" required>
+                    password:<input type="password" id="registerPassword" placeholder="password" required>
+                    <button type="submit">Submit</button>          
+                </form>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function showForm(formType){
+            document.getElementById('loginRow').style.display='none';
+            document.getElementById('registerRow').style.display='none';
+            document.getElementById('formTable').style.display='table';
+            if(formType=='login'){
+                document.getElementById('loginRow').style.display='table-row';
+            }
+            else{
+                document.getElementById('registerRow').style.display='table-row';
+            }
+        }
+        function validateLogin(){
+            const Username=document.getElementById('loginUsername').value;
+            const password=document.getElementById('loginPassword').value;
+            if(username==''||password==''){
+                alert('please fill in all fields');
+                return flase;
+            }
+            alert('Login successfull');
+            return flase;
+        }
+        function validateRegister(){
+            const name=document.getElementById('registerName').value;
+            const phone=document.getElementById('registerPhone').value;
+            const email=document.getElementById('registerEmail').value;
+            const dob=document.getElementById('registerDOB').value;
+            const password=document.getElementById('registerpassword').value;
+        if(name===''||phone===''||email===''||dob===''||password===''){
+            alert('please fill in all fields');
+            return false;
+        }
+        const phonePattern=/^[0-9]{10}$/;
+        if(!phone.match(phonePattern)){
+            alert('please enter a valid 10-digit phone number.');
+            return false;
+        }
+        const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]=$/;
+        if(!email.match(emailPattern)){
+            alert('please enter a valid email address');
+            return false;
+        }
+        alert('Registration successfully');
+        return false;
+        }
+    </script>
+</body>
+</html>
