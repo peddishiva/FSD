@@ -1,0 +1,57 @@
+Python - m venv envshiva
+envshiva\Scripts\Activate.bat
+pip install django 
+django-admin  startproject projectshiva
+Cd projectshiva
+pip install djangorestframework
+python manage.py startapp appshiva
+code. 
+-------- code edition 
+projectshiva:
+settings.py
+[
+'appshiva.apps.AppshivaConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+]
+-----
+appshiva:
+-----
+urls.py:
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('appshiva.urls')),
+]
+
+----
+model.py:
+
+from django.db import models
+
+# Create your models here.
+class StudentModel(models.Model):
+    name = models.CharField(max_length=50)
+    dept = models.CharField(max_length=50)
+    roll = models.IntegerField()
+    
+    def __str__(self):
+        return self.name
+
+----
+admin.py:
+
+from django.contrib import admin
+
+# Register your models here.
+from .models import StudentModel
+admin.site.register(StudentModel)
+
+--------
+python manage.py makemigrations
+python manage.py migrate
+python manage.py  createsuperuser
+Enter details

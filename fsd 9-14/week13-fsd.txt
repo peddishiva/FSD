@@ -1,0 +1,78 @@
+python -m venv envshiva
+envshiva\scripts\Activate.bat
+pip install Django
+django-admin startproject menuItems
+cd menuItems
+python manage.py startapp myapp
+code .
+
+-------------
+menuItems:-
+------------
+settings.py:-
+------------
+INSTALLED APPS=[
+ 'myapp',  # Replace with your app name
+]
+
+urls.py:-
+--------
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('myapp.urls')),
+]
+----------
+myapp:-
+--------
+CREATE A FOLDER " TEMPLATES " AND CREATE INDEX.HTML
+
+Index.html:-
+------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+<body>
+    <nav class="navbar navbar-expand-mdbg-light">
+        <a class="navbar-brand nav-link" href="#">Cmrit</a>
+        <ul class="collapse navbar-collapse navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#">Login</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#">profile</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+------
+urls.py:-
+------
+from django.urls import path, include
+from . import views
+
+
+urlspatterns = [
+    path('', views.home, name='/home'),
+    path('home/', views.home, name='home'),
+]
+----------
+views.py:-
+----------
+from django.shortcuts import render
+
+# Create your views here.
+def home(request):
+    return render(request, 'home.html')

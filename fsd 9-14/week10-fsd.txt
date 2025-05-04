@@ -1,0 +1,73 @@
+mkdir week10
+cd week10
+npm install -g @angular/cli
+ng --version
+ng new week10 --standalone=false --routing
+Enter
+Y
+Y
+code .
+cd week10
+
+ng g c home
+ng g c profile
+
+need to make changes in codes:
+-----------------
+profile.component.ts:-
+-------------------
+import{Httpclient,HttpClientModule} from '@angular/common-http';
+import{commonModule} from '@angular/common';
+@component({
+	selector:'app-profile'
+	Standalone: true,
+	imports: [Http ClientModule, CommonModule],
+	templatesURL:'./profile.component.html'
+	StyleUrl:'./profile.component.css'
+})
+export class profileComponent implements OnInit{
+user:any;
+Construct(private http:HttpClient){}
+ngOnInit():Void{
+	this.http.get("https://jsonplaceholdeer:typicode.com/users/").subscribe(())=>{
+	console.log(data);
+	this.user=data;
+});	
+}
+}
+-----------------
+profile.component.html:-
+-----------------
+
+<div class="Card Shadow-sm w-50 mt-5 mx-audio".*ngIf='user'>
+    <h2 class="text-center">hi{{user.name}}</h2>
+    <table class="table table-bordered mt-3">
+        <tr>
+            <th>Username</th>
+            <td>{{user.Username}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{user.email}}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{user.phone}}</td>
+        </tr>
+        <tr>
+            <th>city</th>
+            <td>{{user.address?.city}}</td>
+        </tr>
+        <tr>
+            <th>Zipcode</th>
+            <td>{{user.address?.Zipcode}}</td>
+        </tr>
+        <tr>
+            <th>website</th>
+            <td>{{user.website}}</td>
+        </tr>
+    </table>
+</div>
+
+-----------------
+output:-ng serve

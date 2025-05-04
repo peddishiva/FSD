@@ -1,0 +1,100 @@
+week 9 
+Command-prompt commands:
+mkdir week9
+cd week9
+npm install -g @angular/cli
+ng --version
+ng new week9 --standalone=false --routing
+Enter
+Y
+Y
+Code .
+cd week9
+
+index.html: Add bootstrap verson 4.6 cdn links from getbootstrap.com
+
+
+>create components in terminal by running following commands
+    * if any question asked press y and enter
+
+ng g c home
+ng g c profile
+-----------
+modification in files 
+-----------
+app-routing.module.ts:-
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' } // Redirect to 'home' by default
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+------app.component.html:-
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand bg-light">
+    <a class="navbar-brand" routerLink="/home" routerLinkActive="active">CMRIT</a>
+    <ul class="navbar-nav navbar-collapse collapse">
+      <li class="navbar-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">HOME</a>
+      </li>
+      <li class="navbar-item">
+        <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
+      </li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</body>
+</html>
+
+---------app.module.ts:-
+
+import { NgModule } from '@angular/core';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RouterModule } from '@angular/router'; // Import RouterModule
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ProfileComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule // Add RouterModule here
+  ],
+  providers: [
+    provideClientHydration(withEventReplay())
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+--------
+ng serve

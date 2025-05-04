@@ -1,0 +1,3 @@
+python -m venv envshiva
+envshiva\scripts\Activate.bat
+pip install Django
