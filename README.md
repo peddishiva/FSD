@@ -1,6 +1,8 @@
 # FSD
+
 This repo is about FULL STACK DEVELOPMENT. (FSD) build for calarify my future querries as a Reference 
-prerequisites required : Git and Github account, Visual Studio Code aka VS Code 
+
+ prerequisites required : Git and Github account, Visual Studio Code aka VS Code 
 ---
 
 # Installation Guide 
